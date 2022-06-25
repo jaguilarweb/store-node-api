@@ -19,7 +19,9 @@ I update the ts-node dependency
 
 Create the database.ts and database.json
 
+Create endpoints in the server.ts
 
+Create the initial endpoints on the server file and check with postman. 
 
 
 
