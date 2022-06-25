@@ -17,6 +17,7 @@ Install enviroment and migrations dependencies:
 I update the ts-node dependency
 ```npm install ts-node@10.6.0```
 
+Create the database.ts and database.json
 
 
 
