@@ -17,6 +17,11 @@ Install enviroment and migrations dependencies:
 I update the ts-node dependency
 ```npm install ts-node@10.6.0```
 
+
+
+
+
+
 Install bcrypt
 
 ```npm i bcrypt```
