@@ -52,7 +52,9 @@ You can check running
 - ``` docker-compose exec postgres bash ```
 - ``` :/# psql -h localhost -d name_database -U name_user ```
 
+Create a initial product model
 
+Create a handler
 
 
 
