@@ -54,8 +54,13 @@ You can check running
 
 Create a initial product model
 
-Create a handler
+Create a product handler
 
+Summary:
+- Create the data shape
+- Create tables with migrations
+- Create models
+- Create handlers
 
 
 
