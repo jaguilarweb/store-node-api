@@ -15,7 +15,6 @@ const show = async(req: Request, res: Response) => {
 
 const create = async (req: Request, res: Response) => {
   const user: User = {
-    id: req.body.id,
     firstName: req.body.firstName,
     lastName: req.body.lastName,
     password: req.body.password
@@ -30,7 +29,7 @@ const create = async (req: Request, res: Response) => {
 }
 
 const destroy = async (req: Request, res: Response) => {
-  const deleted = await store.delete(req.body.id);
+  const deleted = await store.delete(req.params.id);
   res.json(deleted);
 }
 

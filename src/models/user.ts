@@ -37,14 +37,14 @@ export class UserStore {
 
   async create(u: User): Promise<User> {
     try {
-      const sql = 'INSERT INTO users (firstName, lastName, password) VALUES($1, $2) RETURNING *';
+      const sql = 'INSERT INTO users (firstName, lastName, password) VALUES($1, $2, $3) RETURNING *';
       // @ts-ignore
       const conn = await Client.connect();
       const result = await conn
           .query(sql, [u.firstName, u.lastName, u.password]);
-      const product = result.rows[0];
+      const user = result.rows[0];
       conn.release()
-      return product;
+      return user;
     } catch (error) {
         throw new Error(`Could not add new user ${u.firstName}. Error: ${error}`);
     }

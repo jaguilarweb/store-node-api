@@ -1,6 +1,7 @@
 import express, { Request, Response } from 'express';
 import bodyParser from 'body-parser';
 import product_route from './handlers/product';
+import user_route from './handlers/user';
 
 
 const app: express.Application = express();
@@ -12,8 +13,9 @@ app.get('/', function (_req: Request, res: Response) {
     res.send('Hello World!')
 })
 
-// 
+// routes
 product_route(app)
+user_route(app)
 
 
 

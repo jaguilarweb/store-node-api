@@ -63,6 +63,11 @@ Summary:
 - Create handlers
 
 
+Create test:
+
+To run test, first create a test_database manually in psql.
+```CREATE DATABASE <name_database_test>;```
+
 
 Install bcrypt
 
