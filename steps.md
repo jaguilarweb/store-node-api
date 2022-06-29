@@ -69,6 +69,12 @@ To run test, first create a test_database manually in psql.
 ```CREATE DATABASE <name_database_test>;```
 
 
+Review if there is a reporter file and the jasmine-spec-reporter configurations.
+Also, check the jasmine.json file.
+
+
+
+
 Install bcrypt
 
 ```npm i bcrypt```
