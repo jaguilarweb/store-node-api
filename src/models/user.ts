@@ -3,8 +3,8 @@ import Client from '../database';
 
 export type User = {
   id?: number;
-  firstName: string;
-  lastName:string;
+  firstname: string;
+  lastname:string;
   password: string;
 }
 
@@ -37,16 +37,16 @@ export class UserStore {
 
   async create(u: User): Promise<User> {
     try {
-      const sql = 'INSERT INTO users (firstName, lastName, password) VALUES($1, $2, $3) RETURNING *';
+      const sql = 'INSERT INTO users (firstname, lastname, password) VALUES($1, $2, $3) RETURNING *';
       // @ts-ignore
       const conn = await Client.connect();
       const result = await conn
-          .query(sql, [u.firstName, u.lastName, u.password]);
+          .query(sql, [u.firstname, u.lastname, u.password]);
       const user = result.rows[0];
       conn.release()
       return user;
     } catch (error) {
-        throw new Error(`Could not add new user ${u.firstName}. Error: ${error}`);
+        throw new Error(`Could not add new user ${u.firstname}. Error: ${error}`);
     }
   }
 

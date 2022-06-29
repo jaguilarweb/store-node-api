@@ -15,8 +15,9 @@ const show = async(req: Request, res: Response) => {
 
 const create = async (req: Request, res: Response) => {
   const user: User = {
-    firstName: req.body.firstName,
-    lastName: req.body.lastName,
+    id: req.body.id,
+    firstname: req.body.firstname,
+    lastname: req.body.lastname,
     password: req.body.password
   }
   try {
