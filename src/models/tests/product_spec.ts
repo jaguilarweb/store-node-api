@@ -59,7 +59,7 @@ describe(" Methods Product Model working", () => {
 
 
   it('should have a delete method', async() => {
-    store.delete("1");
+    await store.delete("1");
     const result = await store.index();
     expect(result).toEqual([]);
   });
