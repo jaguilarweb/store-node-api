@@ -10,7 +10,7 @@
     "test": "export ENV=test && db-migrate --env test up && jasmine-ts && db-migrate db:drop test",
     "tsc": "tsc"
   },
-  "author": "Udacity",
+  "author": "jaguilarweb",
   "license": "ISC",
   "dependencies": {
     "body-parser": "^1.19.0",
