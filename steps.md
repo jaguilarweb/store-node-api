@@ -71,7 +71,10 @@ To run test, first create a test_database manually in psql.
 Review if there is a reporter file and the jasmine-spec-reporter configurations.
 Also, check the jasmine.json file.
 
-when Models test are ok, I start advances tables.
+When Models test are ok then I can create advances tables (foreing keys).
+e.g orders and orders_products tables
+
+
 
 
 

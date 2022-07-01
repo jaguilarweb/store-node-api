@@ -2,6 +2,7 @@ import express, { Request, Response } from 'express';
 import bodyParser from 'body-parser';
 import product_route from './handlers/product';
 import user_route from './handlers/user';
+import order_route from './handlers/order';
 
 
 const app: express.Application = express();
@@ -16,6 +17,7 @@ app.get('/', function (_req: Request, res: Response) {
 // routes
 product_route(app)
 user_route(app)
+order_route(app)
 
 
 
