@@ -32,6 +32,18 @@ export class OrderStore {
       throw new Error(`Could not find order ${id}. Error: ${error}`);
     }
   }
+  async edit(o: Order): Promise<Order> {
+    try {
+      const sql = 'UPDATE orders SET status=($1) WHERE id=($2) RETURNING *';
+      //@ts-ignore
+      const conn = await Client.connect();
+      const result = await conn.query(sql, [o.status, o.id]);
+      conn.release();
+      return result.rows[0];
+    } catch (error){
+      throw new Error(`Could not find order ${o.id}. Error: ${error}`);
+    }
+  }
 
   async create(o: Order): Promise<Order> {
     try {

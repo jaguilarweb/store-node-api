@@ -27,6 +27,21 @@ const create = async (req: Request, res: Response) => {
     res.json(error)
   }
 }
+const update = async (req: Request, res: Response) => {
+  const order: Order = {
+    id: parseInt(req.params.id),
+    status: req.body.status,
+    user_id: req.body.user_id
+  }
+
+  try {
+    const editProduct = await store.edit(order);
+    res.json(editProduct);
+  } catch (error) {
+    res.status(400);
+    res.json(error)
+  }
+}
 
 const addProduct = async(req: Request, res: Response)=> {
   const orderId: string = req.params.id
@@ -47,11 +62,10 @@ const destroy = async (req: Request, res: Response) => {
   res.json(deleted);
 }
 
-
-
 const order_route = (app: express.Application) => {
   app.get('/orders', index)
   app.get('/orders/:id', show)
+  app.patch('/orders/:id', update)
   app.post('/orders', create)
   app.delete('/orders/:id', destroy)
   //Add product
