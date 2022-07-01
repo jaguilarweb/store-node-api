@@ -74,7 +74,7 @@ Also, check the jasmine.json file.
 When Models test are ok then I can create advances tables (foreing keys).
 e.g orders and orders_products tables
 
-
+I added update method for orders.
 
 
 

@@ -15,9 +15,9 @@ const show = async(req: Request, res: Response) => {
 
 const create = async (req: Request, res: Response) => {
   const order: Order = {
-    id: req.body.id,
+    id: parseInt(req.body.id),
     status: req.body.status,
-    user_id: req.body.user_id
+    user_id: parseInt(req.body.user_id)
   }
   try {
     const newOrder = await store.create(order);
@@ -31,7 +31,7 @@ const update = async (req: Request, res: Response) => {
   const order: Order = {
     id: parseInt(req.params.id),
     status: req.body.status,
-    user_id: req.body.user_id
+    user_id: parseInt(req.body.user_id)
   }
 
   try {
