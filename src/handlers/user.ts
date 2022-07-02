@@ -1,5 +1,6 @@
 import express, { Request, Response } from 'express';
 import { User, UserStore } from '../models/user';
+import jwt from 'jsonwebtoken';
 
 const store = new UserStore();
 
@@ -39,7 +40,8 @@ const create = async (req: Request, res: Response) => {
   }
   try {
     const newUser = await store.create(user);
-    res.json(newUser);
+    const token = jwt.sign({user: newUser}, process.env.TOKEN_SECRET!)
+    res.json(token);
   } catch (error) {
     res.status(400);
     res.json(error)
@@ -47,9 +49,20 @@ const create = async (req: Request, res: Response) => {
 }
 
 const authenticate = async (req: Request, res: Response) => {
-  console.log('Ingresa en el handler de authenticate')
-  const user = await store.authenticate(req.body.lastname, req.body.password)
-  res.json(user)
+  const user: User = {
+    firstname: req.body.firstname,
+    lastname: req.body.lastname,
+    password: req.body.password
+  }
+  try {
+    const u = await store.authenticate(req.body.lastname, req.body.password)
+    const token = jwt.sign({user: u}, process.env.TOKEN_SECRET!)
+    res.json(token);
+    
+  } catch (error) {
+    res.status(401);
+    res.json({error});
+  }
 }
 
 const destroy = async (req: Request, res: Response) => {
