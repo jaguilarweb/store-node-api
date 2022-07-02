@@ -76,7 +76,10 @@ e.g orders and orders_products tables
 
 I added update method for orders.
 
+Install cors
 
+```npm i cors```
+```npm i --save-dev @types/cors```
 
 Install bcrypt
 

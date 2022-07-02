@@ -1,4 +1,5 @@
 import express, { Request, Response } from 'express';
+import cors from 'cors';
 import bodyParser from 'body-parser';
 import product_route from './handlers/product';
 import user_route from './handlers/user';
@@ -8,11 +9,21 @@ import order_route from './handlers/order';
 const app: express.Application = express();
 const address: string = "0.0.0.0:3000";
 
+const corsOptions = {
+    origin: 'http://localhost:3000',
+    optionsSuccessStatus: 200 //some legacy browsers (IE11, various)
+}
+
+app.use(cors(corsOptions));
 app.use(bodyParser.json());
 
 app.get('/', function (_req: Request, res: Response) {
     res.send('Hello World!')
 })
+
+/* app.get('/test-cors', cors(corsOptions), function(req, res, next){
+    res.json({msg: 'This is CORS_enabled with middleware'})
+}) */
 
 // routes
 product_route(app)
