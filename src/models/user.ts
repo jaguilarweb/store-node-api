@@ -1,5 +1,5 @@
 import Client from '../database';
-
+import bcrypt from 'bcrypt';
 
 export type User = {
   id?: number;
@@ -7,6 +7,9 @@ export type User = {
   lastname:string;
   password: string;
 }
+
+const pepper = process.env.BCRYPT_PASSWORD;
+const saltRounds = process.env.SALT_ROUNDS!;
 
 export class UserStore {
   async index(): Promise<User[]> {
@@ -37,18 +40,50 @@ export class UserStore {
 
   async create(u: User): Promise<User> {
     try {
-      const sql = 'INSERT INTO users (firstname, lastname, password) VALUES($1, $2, $3) RETURNING *';
       // @ts-ignore
       const conn = await Client.connect();
+      const sql = 'INSERT INTO users (firstname, lastname, password) VALUES($1, $2, $3) RETURNING *';
+
+      const hash = bcrypt.hashSync(
+        u.password + pepper, 
+        parseInt(saltRounds)
+      );
+
       const result = await conn
-          .query(sql, [u.firstname, u.lastname, u.password]);
+          .query(sql, [u.firstname, u.lastname, hash]);
       const user = result.rows[0];
-      conn.release()
+      conn.release();
       return user;
     } catch (error) {
         throw new Error(`Could not add new user ${u.firstname}. Error: ${error}`);
     }
   }
+
+
+  async authenticate(lastname: string, password: string): Promise<User | null> {
+    console.log('user:', lastname)
+    console.log('pass:', password)
+    const conn = await Client.connect()
+    const sql = 'SELECT password FROM users WHERE lastname=($1)'
+
+    const result = await conn.query(sql, [lastname])
+
+    console.log(password+pepper)
+
+    if(result.rows.length) {
+
+      const user = result.rows[0]
+
+      console.log(user)
+
+      if (bcrypt.compareSync(password + pepper, user.password)) {
+        return user
+      }
+    }
+    return null
+  }
+
+
 
   async delete(id: string): Promise<User> {
     try {

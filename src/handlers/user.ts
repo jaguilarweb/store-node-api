@@ -29,6 +29,11 @@ const create = async (req: Request, res: Response) => {
   }
 }
 
+const authenticate = async (req: Request, res: Response) => {
+  const user = await store.authenticate(req.body.lastname, req.body.password)
+  res.json(user)
+}
+
 const destroy = async (req: Request, res: Response) => {
   const deleted = await store.delete(req.params.id);
   res.json(deleted);
@@ -38,6 +43,7 @@ const user_route = (app: express.Application) => {
   app.get('/users', index)
   app.get('/users/:id', show)
   app.post('/users', create)
+  app.post('/users/authenticate', authenticate)
   app.delete('/users/:id', destroy)
 }
 

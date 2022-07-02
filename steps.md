@@ -86,6 +86,9 @@ Install bcrypt
 ```npm i bcrypt```
 ```npm i --save-dev @types/bcrypt```
 
+Import bcrypt in user models
+
+
 Install jsonwebtoken
 
 ```npm i jsonwebtoken```
