@@ -13,6 +13,23 @@ const show = async(req: Request, res: Response) => {
   res.json(user);
 }
 
+const update = async (req: Request, res: Response) => {
+  const user: User = {
+    id: parseInt(req.params.id),
+    firstname: req.body.firstname,
+    lastname: req.body.lastname,
+    password: req.body.password,
+  }
+
+  try {
+    const editUser = await store.edit(user);
+    res.json(editUser);
+  } catch (error) {
+    res.status(400);
+    res.json(error)
+  }
+}
+
 const create = async (req: Request, res: Response) => {
   const user: User = {
     id: req.body.id,
@@ -30,6 +47,7 @@ const create = async (req: Request, res: Response) => {
 }
 
 const authenticate = async (req: Request, res: Response) => {
+  console.log('Ingresa en el handler de authenticate')
   const user = await store.authenticate(req.body.lastname, req.body.password)
   res.json(user)
 }
@@ -42,6 +60,7 @@ const destroy = async (req: Request, res: Response) => {
 const user_route = (app: express.Application) => {
   app.get('/users', index)
   app.get('/users/:id', show)
+  app.patch('/users/:id', update)
   app.post('/users', create)
   app.post('/users/authenticate', authenticate)
   app.delete('/users/:id', destroy)

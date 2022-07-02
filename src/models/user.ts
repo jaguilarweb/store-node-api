@@ -61,29 +61,40 @@ export class UserStore {
 
 
   async authenticate(lastname: string, password: string): Promise<User | null> {
-    console.log('user:', lastname)
-    console.log('pass:', password)
-    const conn = await Client.connect()
+
     const sql = 'SELECT password FROM users WHERE lastname=($1)'
-
+    const conn = await Client.connect()
     const result = await conn.query(sql, [lastname])
-
-    console.log(password+pepper)
+    //console.log(password+pepper)
 
     if(result.rows.length) {
+      const user = result.rows[0];
 
-      const user = result.rows[0]
-
-      console.log(user)
-
-      if (bcrypt.compareSync(password + pepper, user.password)) {
+      if (bcrypt.compareSync(password+pepper, user.password)) {
         return user
       }
     }
     return null
   }
 
-
+  async edit(u: User): Promise<User> {
+    console.log('user: ' + u.lastname)
+    try {
+      const sql = 'UPDATE users SET password=($1) WHERE id=($2) RETURNING *';
+      //@ts-ignore
+      const conn = await Client.connect();
+      const hash = bcrypt.hashSync(
+        u.password + pepper, 
+        parseInt(saltRounds)
+        );
+        
+      const result = await conn.query(sql, [hash, u.id]);
+      conn.release();
+      return result.rows[0];
+    } catch (error){
+      throw new Error(`Could not find user. Error: ${error}`);
+    }
+  }
 
   async delete(id: string): Promise<User> {
     try {
