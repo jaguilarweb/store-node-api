@@ -23,7 +23,10 @@ describe(" Methods User Model defined", () => {
 });
 
 describe(" Methods User Model working", () => {
+
+
   it('create method should add a user', async () => {
+
     const result = await store.create({
       id: 2,
       firstname: "Fabian",
@@ -34,7 +37,7 @@ describe(" Methods User Model working", () => {
       id: 2,
       firstname: "Fabian",
       lastname: "Romero",
-      password: "password123"
+      password: result.password
     });
   });
 
@@ -45,7 +48,7 @@ describe(" Methods User Model working", () => {
         id: 2,
         firstname: "Fabian",
         lastname: "Romero",
-        password: "password123"
+        password: result[0].password
       }
     ]);
   });
@@ -57,7 +60,7 @@ describe(" Methods User Model working", () => {
       id: 2,
       firstname: "Fabian",
       lastname: "Romero",
-      password: "password123"
+      password: result.password
     });
   });
 

@@ -22,6 +22,7 @@ const update = async (req: Request, res: Response) => {
     password: req.body.password,
   }
 
+
   try {
     const editUser = await store.edit(user);
     res.json(editUser);
