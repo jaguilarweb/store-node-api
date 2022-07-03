@@ -19,13 +19,14 @@ Our tech stack from npm will include the following:
 
 - **Postgres** for the database (v.12)
 - **Typescript** as our programming language to development
-- **Jasmine and Supertes** as our tests libraries
+- **Jasmine** as our tests libraries
 - **Node/Express** for the application logic
+- **Cors** from npm for cors
 - **dotenv** from npm for managing environment variables
 - **db-migrate** from npm for migrations
 - **jsonwebtoken** from npm for working with JWTs
 
-Also docker is required for this project.
+Also **docker** is required for this project.
 
 ### Front end Dependencies
 
@@ -33,59 +34,36 @@ There are not Frontend in this version.
 
 ## Getting Started
 
-This repo contains a basic Node and Express app to get you started in constructing an API. To get started, clone this repo and run `npm install` in your terminal at the project root.
+- To get started, clone this repo:
+
+ ```git clone https://github.com/jaguilarweb/store-node-api.git```
+
+- Run `npm install` in your terminal at the project root.
+
+- Base URL: At present this app can only be run locally and is not hosted as a base URL. The backend app is hosted at the default, http://localhost:3000.
 
 ### Docker
 
 To up the Postgres database container, use the command:
-``` docker-compose up ```
+``` docker-compose up -d postgres```
 
-### Running local
-To run local: ```npm run start```
+### Database
 
-### Open a browser
+To setup postgres database use migrations
 
-Open your browser and write a request like:
-```http://localhost:3000```
+```db-migrate up```
 
+### Environment variables
 
-## API Reference
+You need create a .env file in the root. Please copy the environment variables from .example-ev file and fill it.
 
-### Getting Started
+### Script
+To develop environment run: ```npm run watch```
+To test run: ```npm run test```
 
-- Base URL: At present this app can only be run locally and is not hosted as a base URL. The backend app is hosted at the default, http://localhost:3000.
-- Authentication: This version of the application does not require authentication or API keys.
-
-### Endpoints
-
-#### GET '/api'
-
-- General
-  - This endpoint should return a simple string with **"Welcome, enjoy the api!"**, and status 200.
-
-#### GET '/..'
-
-Reference
-- General
-  - This endpoint should return a resize image.
-  - You need to provide 3 parameters:
-    * filename (string between the choices below)
-    * width (number greater than 0)
-    * hight (number greater than 0 )
-
-Reference
-This application allow following choices to filenames:
-- encenadaport
-- fjord
-- icelandwaterfall
-- palmtunnel
-- santamonica
-
-Example:
-
-```http://localhost:3000/```
-
-
+### Ports
+- Api is listenign by the port **3000**
+- Postgres are listening by the port **5432** (docker-compose)
 
 
 ## Disclaimer

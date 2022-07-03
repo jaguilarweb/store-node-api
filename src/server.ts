@@ -18,7 +18,7 @@ app.use(cors(corsOptions));
 app.use(bodyParser.json());
 
 app.get('/', function (_req: Request, res: Response) {
-    res.send('Hello World!')
+    res.status(200).send('Welcome, enjoy the api!')
 })
 
 /* app.get('/test-cors', cors(corsOptions), function(req, res, next){
