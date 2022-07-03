@@ -5,8 +5,8 @@ import jwt from 'jsonwebtoken';
 const store = new OrderStore();
 
 const index = async(_req: Request, res: Response) => {
-  const orders = await store.index()
-  res.json(orders)
+  const orders = await store.index();
+  res.json(orders);
 }
 
 const show = async(req: Request, res: Response) => {
@@ -16,12 +16,12 @@ const show = async(req: Request, res: Response) => {
 
 const create = async (req: Request, res: Response) => {
   try {
-    const authorizationHeader = req.headers.authorization!
-    const token = authorizationHeader.split(' ')[1]
-    jwt.verify(token, process.env.TOKEN_SECRET!)
+    const authorizationHeader = req.headers.authorization!;
+    const token = authorizationHeader.split(' ')[1];
+    jwt.verify(token, process.env.TOKEN_SECRET!);
   } catch(err) {
-      res.status(401)
-      res.json('Access denied, invalid token')
+      res.status(401);
+      res.json('Access denied, invalid token');
       return
   }
 
@@ -38,6 +38,7 @@ const create = async (req: Request, res: Response) => {
     res.json(error)
   }
 }
+
 const update = async (req: Request, res: Response) => {
   const order: Order = {
     id: parseInt(req.params.id),
@@ -68,28 +69,25 @@ const addProduct = async(req: Request, res: Response)=> {
   }
 }
 
-
 const destroy = async (req: Request, res: Response) => {
   try {
     const authorizationHeader = req.headers.authorization!
     const token = authorizationHeader.split(' ')[1]
     jwt.verify(token, process.env.TOKEN_SECRET!)
-} catch(err) {
+  } catch(err) {
     res.status(401)
     res.json('Access denied, invalid token')
     return
-}
+  }
 
-try {
-    const deleted = await store.delete(req.params.id)
-    res.json(deleted)
-} catch (error) {
-    res.status(400)
-    res.json({ error })
+  try {
+      const deleted = await store.delete(req.params.id)
+      res.json(deleted)
+  } catch (error) {
+      res.status(400)
+      res.json({ error })
+  }
 }
-}
-
-
 
 const order_route = (app: express.Application) => {
   app.get('/orders', index)

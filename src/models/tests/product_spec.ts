@@ -2,7 +2,6 @@ import { ProductStore } from "../product";
 
 const store = new ProductStore();
 
-
 describe(" Methods Product Model defined", () => {
   it("should have an index method", () => {
     expect(store.index).toBeDefined();
@@ -47,7 +46,6 @@ describe(" Methods Product Model working", () => {
     ]);
   });
 
-
   it('show method should return the correct product ', async () => {
     const result = await store.show("1")
     expect(result).toEqual({
@@ -57,12 +55,10 @@ describe(" Methods Product Model working", () => {
     });
   });
 
-
   it('should have a delete method', async() => {
     await store.delete("1");
     const result = await store.index();
     expect(result).toEqual([]);
   });
-
 
 });

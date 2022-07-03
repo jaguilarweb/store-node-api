@@ -21,7 +21,7 @@ if(ENV === 'test') {
     user: POSTGRES_USER,
     password: POSTGRES_PASSWORD,
   })
-  console.log("ENV", ENV);
+/*   console.log("ENV", ENV); */
 }
 
 if(ENV === 'dev') {
@@ -32,7 +32,7 @@ if(ENV === 'dev') {
     password: POSTGRES_PASSWORD,
   })
 
-  console.log("My ENV", ENV);
+/*   console.log("My ENV", ENV); */
 }
 
 export default client

@@ -16,7 +16,7 @@ export class OrderStore {
       conn.release();
       return result.rows;
     } catch (error) {
-      throw new Error(`Could not get orders. Error: ${error}`)
+      throw new Error(`Could not get orders. Error: ${error}`);
     }
   }
 
@@ -32,6 +32,7 @@ export class OrderStore {
       throw new Error(`Could not find order ${id}. Error: ${error}`);
     }
   }
+
   async edit(o: Order): Promise<Order> {
     try {
       const sql = 'UPDATE orders SET status=($1) WHERE id=($2) RETURNING *';
@@ -64,19 +65,17 @@ export class OrderStore {
     try {
       const sql = 'INSERT INTO orders_products (quantity, order_id, product_id) VALUES($1, $2, $3) RETURNING *'
       //@ts-ignore
-      const conn = await Client.connect()
-
+      const conn = await Client.connect();
       const result = await conn
-        .query(sql, [quantity, orderId, productId])
+        .query(sql, [quantity, orderId, productId]);
 
-      const order = result.rows[0]
-      conn.release()
-      return order
+      const order = result.rows[0];
+      conn.release();
+      return order;
     } catch (error) {
-      throw new Error(`Could not add product ${productId} to order ${orderId}: ${error}`)
+      throw new Error(`Could not add product ${productId} to order ${orderId}: ${error}`);
     }
   }
-
 
   async delete(id: string): Promise<Order> {
     try {
@@ -91,7 +90,6 @@ export class OrderStore {
       throw new Error(`Could not delete order ${id}. Error ${error}`);
     }
   }
-
 
   async orderByUser(id: string): Promise<Order[]> {
     try {

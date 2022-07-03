@@ -62,7 +62,6 @@ describe(" Methods Order Model working", () => {
     ]);
   });
 
-
   it('show method should return the correct order ', async () => {
     const result = await store.show("1")
     expect(result).toEqual({
@@ -83,6 +82,3 @@ describe(" Methods Order Model working", () => {
   });
 
 });
-
-
-

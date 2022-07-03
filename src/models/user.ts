@@ -21,7 +21,7 @@ export class UserStore {
       conn.release();
       return result.rows;
     } catch (error) {
-      throw new Error(`Could not get users. Error: ${error}`)
+      throw new Error(`Could not get users. Error: ${error}`);
     }
   }
 
@@ -59,12 +59,10 @@ export class UserStore {
     }
   }
 
-
   async authenticate(lastname: string, password: string): Promise<User | null> {
-
-    const sql = 'SELECT password FROM users WHERE lastname=($1)'
-    const conn = await Client.connect()
-    const result = await conn.query(sql, [lastname])
+    const sql = 'SELECT password FROM users WHERE lastname=($1)';
+    const conn = await Client.connect();
+    const result = await conn.query(sql, [lastname]);
     //console.log(password+pepper)
 
     if(result.rows.length) {
@@ -78,7 +76,6 @@ export class UserStore {
   }
 
   async edit(u: User): Promise<User> {
-    console.log('user: ' + u.lastname)
     try {
       const sql = 'UPDATE users SET password=($1) WHERE id=($2) RETURNING *';
       //@ts-ignore
@@ -87,7 +84,7 @@ export class UserStore {
         u.password + pepper, 
         parseInt(saltRounds)
         );
-        
+
       const result = await conn.query(sql, [hash, u.id]);
       conn.release();
       return result.rows[0];
@@ -95,9 +92,6 @@ export class UserStore {
       throw new Error(`Could not find user. Error: ${error}`);
     }
   }
-
-
-
 
   async delete(id: string): Promise<User> {
     try {
@@ -112,6 +106,5 @@ export class UserStore {
       throw new Error(`Could not delete user ${id}. Error ${error}`);
     }
   }
-
 
 }

@@ -5,7 +5,6 @@ import product_route from './handlers/product';
 import user_route from './handlers/user';
 import order_route from './handlers/order';
 
-
 const app: express.Application = express();
 const address: string = "0.0.0.0:3000";
 
@@ -29,8 +28,6 @@ app.get('/', function (_req: Request, res: Response) {
 product_route(app)
 user_route(app)
 order_route(app)
-
-
 
 app.listen(3000, function () {
     console.log(`starting app on: ${address}`);

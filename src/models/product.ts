@@ -16,7 +16,7 @@ export class ProductStore {
       conn.release();
       return result.rows;
     } catch (error) {
-      throw new Error(`Could not get products. Error: ${error}`)
+      throw new Error(`Could not get products. Error: ${error}`);
     }
   }
 
@@ -41,7 +41,7 @@ export class ProductStore {
       const result = await conn
           .query(sql, [p.name, p.price]);
       const product = result.rows[0];
-      conn.release()
+      conn.release();
       return product;
     } catch (error) {
         throw new Error(`Could not add new book ${p.name}. Error: ${error}`);

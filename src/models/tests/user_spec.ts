@@ -2,7 +2,6 @@ import { UserStore } from "../user";
 
 const store = new UserStore();
 
-
 describe(" Methods User Model defined", () => {
   it("should have an index method", () => {
     expect(store.index).toBeDefined();
@@ -23,7 +22,6 @@ describe(" Methods User Model defined", () => {
 });
 
 describe(" Methods User Model working", () => {
-
 
   it('create method should add a user', async () => {
 
@@ -63,7 +61,6 @@ describe(" Methods User Model working", () => {
       password: result.password
     });
   });
-
 
   it('should have a delete method', async() => {
     await store.delete("2");

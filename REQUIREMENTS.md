@@ -5,7 +5,8 @@ These are the notes from a meeting with the frontend developer that describe wha
 
 # API Endpoints
 
-## GET '/'
+## Root
+### GET '/'
 - General
   - This endpoint should return a simple string with **"Welcome, enjoy the api!"**, and status 200.
 
@@ -25,7 +26,7 @@ These are the notes from a meeting with the frontend developer that describe wha
     {"id":2,"name":"pencil","price":3},
     {"id":3,"name":"notebook","price":25},
     {"id":4,"name":"folder","price":15}
- ]
+  ]
 ```
 
 ### POST'/products' (Create)
@@ -84,7 +85,7 @@ These are the notes from a meeting with the frontend developer that describe wha
 - Return token
 
 ```
-""eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoxMywiZmlyc3RuYW1lIjoiZXJhc2VyIiwibGFzdG5hbWUiOiJSZXZlY28iLCJwYXNzd29yZCI6IiQyYiQxMCQ4OW9ocGVpRXdrMTMxU2MvcFMuNERlYnI0L2FQbjMvYXRHQ1FuQTNRdlp6enJOWXdobWNoaSJ9LCJpYXQiOjE2NTY4NDQwNzJ9.mb63ChGeTj8N0SZEuWKt1AoFFyZy4Fe1-9_6fufO8Mo"% "
+"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoxMywiZmlyc3RuYW1lIjoiZXJhc2VyIiwibGFzdG5hbWUiOiJSZXZlY28iLCJwYXNzd29yZCI6IiQyYiQxMCQ4OW9ocGVpRXdrMTMxU2MvcFMuNERlYnI0L2FQbjMvYXRHQ1FuQTNRdlp6enJOWXdobWNoaSJ9LCJpYXQiOjE2NTY4NDQwNzJ9.mb63ChGeTj8N0SZEuWKt1AoFFyZy4Fe1-9_6fufO8Mo"% "
 ```
 
 ### GET'/users/{id}' (Show)
@@ -122,43 +123,59 @@ These are the notes from a meeting with the frontend developer that describe wha
   ]
 ```
 
-
 ## Data Shapes
 
 ### Product Table
+
+```
   id SERIAL PRIMARY KEY
   name VARCHAR(150)
   price integer
+```
 
 ### Product Model
+
+```
   id?: number
   name: string
   price: number
+```
 
 ### User Table
+
+```
   id SERIAL PRIMARY  KEY
   firstName VARCHAR(100)
   lastName VARCHAR(100)
   password VARCHAR(100)
+```
 
 ### User Model
+```
   id?: number
   firstname: string
   lastname:string
   password: string
+```
 
 ### Orders Table
+```
   id SERIAL PRIMARY KEY
   status varchar(64)
   user_id integer
+```
 
 ### Orders Model
+```
   id?: number
   status: string
   user_id: number
+```
 
 ### Orders_Products Table (Help table)
+```
   id SERIAL PRIMARY KEY
   quantity integer
   order_id integer
   product_id integer
+```
