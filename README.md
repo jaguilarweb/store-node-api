@@ -2,8 +2,6 @@
 
 ## Introduction
 
-## :construction:
-
 Store Node API Project supply the Javascript API to create an online storefront to showcase products.
 
 This app will be able to browse an index of all products, see the specifics of a single product, and add products to an order in a cart page. 
@@ -36,7 +34,7 @@ There are not Frontend in this version.
 
 - To get started, clone this repo:
 
- ```git clone https://github.com/jaguilarweb/store-node-api.git```
+    ```git clone https://github.com/jaguilarweb/store-node-api.git```
 
 - Run `npm install` in your terminal at the project root.
 
@@ -57,12 +55,12 @@ To setup postgres database use migrations
 
 You need create a .env file in the root. Please copy the environment variables from .example-ev file and fill it.
 
-### Script
+### Scripts
 To develop environment run: ```npm run watch```
 To test run: ```npm run test```
 
 ### Ports
-- Api is listenign by the port **3000**
+- Api is listening by the port **3000**
 - Postgres are listening by the port **5432** (docker-compose)
 
 

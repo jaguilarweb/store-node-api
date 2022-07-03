@@ -92,4 +92,18 @@ export class OrderStore {
     }
   }
 
+
+  async orderByUser(id: string): Promise<Order[]> {
+    try {
+      const sql = 'SELECT * FROM orders WHERE user_id=($1)';
+      //@ts-ignore
+      const conn = await Client.connect();
+      const result = await conn.query(sql, [id]);
+      conn.release();
+      return result.rows;
+    } catch (error){
+      throw new Error(`Could not find order ${id}. Error: ${error}`);
+    }
+  }
+
 }

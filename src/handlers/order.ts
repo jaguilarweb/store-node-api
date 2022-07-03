@@ -68,6 +68,7 @@ const addProduct = async(req: Request, res: Response)=> {
   }
 }
 
+
 const destroy = async (req: Request, res: Response) => {
   try {
     const authorizationHeader = req.headers.authorization!
@@ -88,6 +89,8 @@ try {
 }
 }
 
+
+
 const order_route = (app: express.Application) => {
   app.get('/orders', index)
   app.get('/orders/:id', show)
@@ -96,6 +99,7 @@ const order_route = (app: express.Application) => {
   app.delete('/orders/:id', destroy)
   //Add product
   app.post('/orders/:id/products', addProduct)
+
 }
 
 export default order_route;

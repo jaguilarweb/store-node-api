@@ -96,6 +96,9 @@ export class UserStore {
     }
   }
 
+
+
+
   async delete(id: string): Promise<User> {
     try {
       const sql = 'DELETE FROM users WHERE id=($1)';
@@ -109,5 +112,6 @@ export class UserStore {
       throw new Error(`Could not delete user ${id}. Error ${error}`);
     }
   }
+
 
 }

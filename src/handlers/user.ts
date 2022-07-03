@@ -1,8 +1,12 @@
 import express, { Request, Response } from 'express';
 import { User, UserStore } from '../models/user';
+
+import {OrderStore} from '../models/order';
+
 import jwt from 'jsonwebtoken';
 
 const store = new UserStore();
+const orderStore = new OrderStore();
 
 const index = async(_req: Request, res: Response) => {
   const users = await store.index()
@@ -50,11 +54,6 @@ const create = async (req: Request, res: Response) => {
 }
 
 const authenticate = async (req: Request, res: Response) => {
-  const user: User = {
-    firstname: req.body.firstname,
-    lastname: req.body.lastname,
-    password: req.body.password
-  }
   try {
     const u = await store.authenticate(req.body.lastname, req.body.password)
     const token = jwt.sign({user: u}, process.env.TOKEN_SECRET!)
@@ -65,6 +64,12 @@ const authenticate = async (req: Request, res: Response) => {
     res.json({error});
   }
 }
+
+const showByUser = async(req: Request, res: Response) => {
+  const orderByUser = await orderStore.orderByUser(req.params.id);
+  res.json(orderByUser);
+}
+
 
 const destroy = async (req: Request, res: Response) => {
   const deleted = await store.delete(req.params.id);
@@ -78,6 +83,8 @@ const user_route = (app: express.Application) => {
   app.post('/users', create)
   app.post('/users/authenticate', authenticate)
   app.delete('/users/:id', destroy)
+    //Show by user
+    app.post('/users/:id/orders', showByUser)
 }
 
 export default user_route;
