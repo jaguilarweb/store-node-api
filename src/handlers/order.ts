@@ -4,14 +4,43 @@ import jwt from 'jsonwebtoken';
 
 const store = new OrderStore();
 
-const index = async(_req: Request, res: Response) => {
-  const orders = await store.index();
-  res.json(orders);
+const index = async(req: Request, res: Response) => {
+  try {
+    const authorizationHeader = req.headers.authorization!;
+    const token = authorizationHeader.split(' ')[1];
+    jwt.verify(token, process.env.TOKEN_SECRET!);
+  } catch(err) {
+      res.status(401);
+      res.json('Access denied, invalid token');
+      return
+  }
+  try {
+    const orders = await store.index();
+    res.json(orders);
+  } catch (error) {
+      res.status(400);
+      res.json(error)
+  }
 }
 
 const show = async(req: Request, res: Response) => {
-  const order = await store.show(req.params.id);
-  res.json(order);
+  try {
+    const authorizationHeader = req.headers.authorization!;
+    const token = authorizationHeader.split(' ')[1];
+    jwt.verify(token, process.env.TOKEN_SECRET!);
+  } catch(err) {
+      res.status(401);
+      res.json('Access denied, invalid token');
+      return
+  }
+  try {
+    const order = await store.show(req.params.id);
+    res.json(order);
+  } catch (error) {
+      res.status(400);
+      res.json(error)
+  }
+
 }
 
 const create = async (req: Request, res: Response) => {
@@ -34,12 +63,22 @@ const create = async (req: Request, res: Response) => {
     const newOrder = await store.create(order);
     res.json(newOrder);
   } catch (error) {
-    res.status(400);
-    res.json(error)
+      res.status(400);
+      res.json(error)
   }
 }
 
 const update = async (req: Request, res: Response) => {
+  try {
+    const authorizationHeader = req.headers.authorization!;
+    const token = authorizationHeader.split(' ')[1];
+    jwt.verify(token, process.env.TOKEN_SECRET!);
+  } catch(err) {
+      res.status(401);
+      res.json('Access denied, invalid token');
+      return
+  }
+
   const order: Order = {
     id: parseInt(req.params.id),
     status: req.body.status,
@@ -50,12 +89,22 @@ const update = async (req: Request, res: Response) => {
     const editProduct = await store.edit(order);
     res.json(editProduct);
   } catch (error) {
-    res.status(400);
-    res.json(error)
+      res.status(400);
+      res.json(error)
   }
 }
 
 const addProduct = async(req: Request, res: Response)=> {
+  try {
+    const authorizationHeader = req.headers.authorization!;
+    const token = authorizationHeader.split(' ')[1];
+    jwt.verify(token, process.env.TOKEN_SECRET!);
+  } catch(err) {
+      res.status(401);
+      res.json('Access denied, invalid token');
+      return
+  }
+
   const orderId: string = req.params.id
   const productId: string = req.body.productId
   const quantity: number = parseInt(req.body.quantity)

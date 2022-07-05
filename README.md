@@ -55,6 +55,21 @@ To setup postgres database use migrations
 
 You need create a .env file in the root. Please copy the environment variables from .example-ev file and fill it.
 
+Just for elearning purpose I added the enviroment value.
+Please, you never do it in your projects.
+
+```
+POSTGRES_HOST=127.0.0.1
+POSTGRES_DB=full_stack_db
+POSTGRES_TEST_DB=full_stack_dev_test
+POSTGRES_USER=full_stack_user
+POSTGRES_PASSWORD=password123
+ENV=dev
+BCRYPT_PASSWORD=some-words-to-security
+SALT_ROUNDS=10
+TOKEN_SECRET=ultra-secret-word
+```
+
 ### Scripts
 To develop environment run: ```npm run watch```
 To test run: ```npm run test```

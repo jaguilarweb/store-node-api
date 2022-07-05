@@ -7,14 +7,42 @@ import jwt from 'jsonwebtoken';
 const store = new UserStore();
 const orderStore = new OrderStore();
 
-const index = async(_req: Request, res: Response) => {
-  const users = await store.index();
-  res.json(users);
+const index = async(req: Request, res: Response) => {
+  try {
+    const authorizationHeader = req.headers.authorization!;
+    const token = authorizationHeader.split(' ')[1];
+    jwt.verify(token, process.env.TOKEN_SECRET!);
+  } catch (error) {
+      res.status(401);
+      res.json('Access denied, invalid token');
+  }
+
+  try {
+    const users = await store.index();
+    res.json(users);
+  } catch (error) {
+      res.status(400);
+      res.json(error);
+  }
 }
 
 const show = async(req: Request, res: Response) => {
-  const user = await store.show(req.params.id);
-  res.json(user);
+  try {
+    const authorizationHeader = req.headers.authorization!;
+    const token = authorizationHeader.split(' ')[1];
+    jwt.verify(token, process.env.TOKEN_SECRET!);
+  } catch (error) {
+      res.status(400);
+      res.json(error);
+  }
+
+  try {
+    const user = await store.show(req.params.id);
+    res.json(user);
+  } catch (error) {
+      res.status(400);
+      res.json(error);
+  }
 }
 
 const update = async (req: Request, res: Response) => {
@@ -24,13 +52,21 @@ const update = async (req: Request, res: Response) => {
     lastname: req.body.lastname,
     password: req.body.password,
   }
+  try {
+    const authorizationHeader = req.headers.authorization!;
+    const token = authorizationHeader.split(' ')[1];
+    jwt.verify(token, process.env.TOKEN_SECRET!);
+  } catch (error) {
+      res.status(400);
+      res.json(error);
+  }
 
   try {
     const editUser = await store.edit(user);
     res.json(editUser);
   } catch (error) {
-    res.status(400);
-    res.json(error)
+      res.status(400);
+      res.json(error)
   }
 }
 
@@ -47,8 +83,8 @@ const create = async (req: Request, res: Response) => {
     const token = jwt.sign({user: newUser}, process.env.TOKEN_SECRET!);
     res.json(token);
   } catch (error) {
-    res.status(400);
-    res.json(error)
+      res.status(400);
+      res.json(error)
   }
 }
 
@@ -59,19 +95,47 @@ const authenticate = async (req: Request, res: Response) => {
     res.json(token);
 
   } catch (error) {
-    res.status(401);
-    res.json({error});
+      res.status(401);
+      res.json({error});
   }
 }
 
 const showByUser = async(req: Request, res: Response) => {
-  const orderByUser = await orderStore.orderByUser(req.params.id);
-  res.json(orderByUser);
+  try {
+    const authorizationHeader = req.headers.authorization!;
+    const token = authorizationHeader.split(' ')[1];
+    jwt.verify(token, process.env.TOKEN_SECRET!);
+  } catch (error) {
+      res.status(400);
+      res.json(error);
+  }
+  try {
+    const orderByUser = await orderStore.orderByUser(req.params.id);
+    res.json(orderByUser);
+  } catch (error) {
+      res.status(400);
+      res.json(error);
+  }
 }
 
 const destroy = async (req: Request, res: Response) => {
-  const deleted = await store.delete(req.params.id);
-  res.json(deleted);
+  try {
+    const authorizationHeader = req.headers.authorization!;
+    const token = authorizationHeader.split(' ')[1];
+    jwt.verify(token, process.env.TOKEN_SECRET!);
+  } catch (error) {
+      res.status(400);
+      res.json(error);
+  }
+
+  try {
+    const deleted = await store.delete(req.params.id);
+    res.json(deleted);
+  } catch (error) {
+      res.status(400);
+      res.json(error)
+  }
+
 }
 
 const user_route = (app: express.Application) => {

@@ -55,14 +55,29 @@ These are the notes from a meeting with the frontend developer that describe wha
 ```
 {"id":1,"name":"book","price":20}
 ```
+### DELETE '/products' (DELETE)
+
+- General
+  - This endpoint delete a item of products.
+  - Token is required
+
+* Sample: run in the terminal  `curl -X DELETE -H "Authorization: <token> http://localhost:3000/users/2`
+
+- Return value
+
+```
+  "The product id: 8 was deleted."
+```
+
 
 ## USERS
 ### GET '/users' (Index)
 
 - General
   - This endpoint should return a list of users. The user passwords are encrypted (bcrypt).
+  - Token is required
 
-* Sample: run in the terminal  `curl http://localhost:3000/users`
+* Sample: run in the terminal  `curl -H "Authorization: <token> http://localhost:3000/users`
 
 - Return value
 
@@ -79,10 +94,11 @@ These are the notes from a meeting with the frontend developer that describe wha
 
 - General
   - This endpoint create new users, which require the firsname, lastname and password.
+  - Token is not required, but one is created to every new user.
 
 * Sample: run in the terminal  `curl -X POST -H "Content-Type: application/json" -d '{"firstname":"eraser", "lastname":"Reveco", "password":"password123"}' http://127.0.0.1:3000/users `
 
-- Return token
+- Return token SAMPLE
 
 ```
 "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoxMywiZmlyc3RuYW1lIjoiZXJhc2VyIiwibGFzdG5hbWUiOiJSZXZlY28iLCJwYXNzd29yZCI6IiQyYiQxMCQ4OW9ocGVpRXdrMTMxU2MvcFMuNERlYnI0L2FQbjMvYXRHQ1FuQTNRdlp6enJOWXdobWNoaSJ9LCJpYXQiOjE2NTY4NDQwNzJ9.mb63ChGeTj8N0SZEuWKt1AoFFyZy4Fe1-9_6fufO8Mo"% "
@@ -92,14 +108,16 @@ These are the notes from a meeting with the frontend developer that describe wha
 
 - General
   - This endpoint show specific users, which require their id as parameter
+  - Token is required
 
-* Sample: run in the terminal  `curl http://localhost:3000/users/2`
+* Sample: run in the terminal  `curl-H "Authorization: <token> http://localhost:3000/users/2`
 
 - Return value
 
 ```
 {"id":2,"firstname":"Barbara","lastname":"Montero","password":"$2b$10$Z3SWHTY58yoP0hQJquf9LO58h2z/Sq5CvGnIN77BafKT5qLv755IK"}
 ```
+
 
 
 ## Orders
