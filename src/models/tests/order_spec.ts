@@ -17,7 +17,7 @@ describe(" Methods Order Model defined", () => {
     expect(store.create).toBeDefined();
   });
 
-  it('should have a edit method', () => {
+  it('should have an edit method', () => {
     expect(store.edit).toBeDefined();
   });
   
@@ -31,23 +31,23 @@ describe(" Methods Order Model working", () => {
 
   beforeAll(async () => {
     await userStore.create({
-      id: 1,
+      id: 4,
       firstname: "Fabian",
       lastname: "Romero",
       password: "password123"
     });
   });
 
-  it('create method should add a Order', async () => {
+  it('create method should add an Order', async () => {
     const result = await store.create({
-      id: 1,
+      id: 2,
       status: "Active",
-      user_id: 1
+      user_id: 4
     });
     expect(result).toEqual({
-      id: 1,
+      id: 2,
       status: "Active",
-      user_id: 1
+      user_id: 4
     });
   });
 
@@ -55,30 +55,30 @@ describe(" Methods Order Model working", () => {
     const result = await store.index();
     expect(result).toEqual([
       {
-        id: 1,
+        id: 2,
         status: "Active",
-        user_id: 1
+        user_id: 4
       }
     ]);
   });
 
   it('show method should return the correct order ', async () => {
-    const result = await store.show("1")
+    const result = await store.show("2")
     expect(result).toEqual({
-      id: 1,
+      id: 2,
       status: "Active",
-      user_id: 1
+      user_id: 4
     });
   });
 
   it('should have a delete method', async() => {
-    await store.delete("1");
+    await store.delete("2");
     const result = await store.index();
     expect(result).toEqual([]);
   });
 
   afterAll(async () => {
-    await userStore.delete("1");
+    await userStore.delete("4");
   });
 
 });

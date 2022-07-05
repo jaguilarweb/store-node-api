@@ -94,3 +94,7 @@ Install jsonwebtoken
 ```npm i jsonwebtoken```
 ```npm i --save-dev @types/jsonwebtoken```
 
+Create test for model and handlers
+
+``` npm i supertest ```
+``` npm i --save-dev @types/supertest```

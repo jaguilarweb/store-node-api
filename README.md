@@ -17,7 +17,7 @@ Our tech stack from npm will include the following:
 
 - **Postgres** for the database (v.12)
 - **Typescript** as our programming language to development
-- **Jasmine** as our tests libraries
+- **Jasmine and Supertest** as our tests libraries
 - **Node/Express** for the application logic
 - **Cors** from npm for cors
 - **dotenv** from npm for managing environment variables

@@ -24,12 +24,12 @@ describe(" Methods Product Model defined", () => {
 describe(" Methods Product Model working", () => {
   it('create method should add a product', async () => {
     const result = await store.create({
-      id: 1,
+      id: 2,
       name: "T-shirt",
       price: 45
     });
     expect(result).toEqual({
-      id: 1,
+      id: 2,
       name: "T-shirt",
       price: 45
     });
@@ -39,7 +39,7 @@ describe(" Methods Product Model working", () => {
     const result = await store.index();
     expect(result).toEqual([
       {
-        id: 1,
+        id: 2,
         name: "T-shirt",
         price: 45
       }
@@ -47,16 +47,16 @@ describe(" Methods Product Model working", () => {
   });
 
   it('show method should return the correct product ', async () => {
-    const result = await store.show("1")
+    const result = await store.show("2")
     expect(result).toEqual({
-      id: 1,
+      id: 2,
       name: "T-shirt",
       price: 45
     });
   });
 
   it('should have a delete method', async() => {
-    await store.delete("1");
+    await store.delete("2");
     const result = await store.index();
     expect(result).toEqual([]);
   });

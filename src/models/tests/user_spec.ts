@@ -26,13 +26,13 @@ describe(" Methods User Model working", () => {
   it('create method should add a user', async () => {
 
     const result = await store.create({
-      id: 2,
+      id: 5,
       firstname: "Fabian",
       lastname: "Romero",
       password: "password123"
     });
     expect(result).toEqual({
-      id: 2,
+      id: 5,
       firstname: "Fabian",
       lastname: "Romero",
       password: result.password
@@ -43,7 +43,7 @@ describe(" Methods User Model working", () => {
     const result = await store.index();
     expect(result).toEqual([
       {
-        id: 2,
+        id: 5,
         firstname: "Fabian",
         lastname: "Romero",
         password: result[0].password
@@ -53,9 +53,9 @@ describe(" Methods User Model working", () => {
 
 
   it('show method should return the correct user ', async () => {
-    const result = await store.show("2")
+    const result = await store.show("5")
     expect(result).toEqual({
-      id: 2,
+      id: 5,
       firstname: "Fabian",
       lastname: "Romero",
       password: result.password
@@ -63,7 +63,7 @@ describe(" Methods User Model working", () => {
   });
 
   it('should have a delete method', async() => {
-    await store.delete("2");
+    await store.delete("5");
     const result = await store.index();
     expect(result).toEqual([]);
   });
